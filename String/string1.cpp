@@ -71,3 +71,22 @@ private:
         m_data = new_data;
     }
 };
+
+void itoa_impl(int i, string& s) {
+    if (i != 0) {
+        itoa_impl(i / 10, s);
+        s.push_back('0' + i % 10);
+    }
+}
+
+string itoa(int i) {
+    if (i == 0) return string("0");
+    string ret;
+    if (i < 0) {
+        ret.push_back('-');
+        itoa_impl(-i, ret);
+    } else {
+        itoa_impl(i, ret);
+    }
+    return ret;
+}
