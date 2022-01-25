@@ -17,6 +17,9 @@ public:
     string(const string& x): m_size(x.m_size), m_capacity(m_size + 1), m_data(new char[m_capacity]) {
         memcpy(m_data, x.m_data, m_capacity);
     }
+    string(string&& x): m_size(x.m_size), m_capacity(x.m_capacity), m_data(x.m_data) {
+        x.m_data = nullptr;
+    }
     string& operator=(const string& rhs) {
         size_t new_size = rhs.m_size;
         size_t new_capacity = new_size + 1;
@@ -26,6 +29,14 @@ public:
         m_size = new_size;
         m_capacity = new_capacity;
         m_data = new_data;
+        return *this;
+    }
+    string& operator=(string&& rhs) {
+        delete [] m_data;
+        m_size = rhs.m_size;
+        m_capacity = rhs.m_capacity;
+        m_data = rhs.m_data;
+        rhs.m_data = nullptr;
         return *this;
     }
     void push_back(char c) {
