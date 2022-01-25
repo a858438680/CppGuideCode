@@ -1,0 +1,123 @@
+#include <cstdlib>
+#include <cstring>
+#include <cstdio>
+
+class move_t {};
+
+static move_t move_tag;
+
+class string {
+public:
+    string() : m_size(0), m_capacity(1), m_data(new char[1]) {
+        m_data[0] = '\0';
+    }
+    string(const char* str): m_size(strlen(str)), m_capacity(m_size + 1), m_data(new char[m_capacity]) {
+        memcpy(m_data, str, m_capacity);
+    }
+    string(const char* data, size_t size): m_size(size), m_capacity(m_size + 1), m_data(new char[m_capacity]) {
+        memcpy(m_data, data, m_size);
+        m_data[m_size] = '\0';
+    }
+    string(const string& x): m_size(x.m_size), m_capacity(m_size + 1), m_data(new char[m_capacity]) {
+        printf("%d strings copied\n", ++copy_count);
+        memcpy(m_data, x.m_data, m_capacity);
+    }
+    string(const string& x, move_t): m_size(x.m_size), m_capacity(x.m_capacity), m_data(x.m_data) {
+        const_cast<string&>(x).m_data = NULL;
+    }
+    string& operator=(const string& rhs) {
+        printf("%d strings copied\n", ++copy_count);
+        size_t new_size = rhs.m_size;
+        size_t new_capacity = new_size + 1;
+        char *new_data = new char[new_capacity];
+        memcpy(new_data, rhs.m_data, new_capacity);
+        delete [] m_data;
+        m_size = new_size;
+        m_capacity = new_capacity;
+        m_data = new_data;
+        return *this;
+    }
+    string& move(const string& rhs) {
+        delete [] m_data;
+        m_size = rhs.m_size;
+        m_capacity = rhs.m_capacity;
+        m_data = rhs.m_data;
+        const_cast<string&>(rhs).m_data = NULL;
+        return *this;
+    }
+    void push_back(char c) {
+        may_alloc_capacity(m_size + 1);
+        m_data[m_size] = c;
+        ++m_size;
+        m_data[m_size] = '\0';
+    }
+    void pop_back() {
+        if (m_size > 0) {
+            --m_size;
+            m_data[m_size] = '\0';
+        }
+    }
+    char* c_str() {
+        return m_data;
+    }
+    const char* c_str() const {
+        return m_data;
+    }
+    ~string() {
+        delete [] m_data;
+    }
+    const char* begin() const { return m_data; }
+    const char* end() const { return m_data + m_size; }
+    char* begin() { return m_data; }
+    char* end() { return m_data + m_size; }
+private:
+    size_t m_size;
+    size_t m_capacity;
+    char* m_data;
+
+    static int copy_count;
+
+    void may_alloc_capacity(size_t size) {
+        if (size + 1 <= m_capacity) {
+            return;
+        }
+        size_t new_capacity = m_capacity + m_capacity / 2;
+        new_capacity = (size + 1 > new_capacity) ? (size + 1) : new_capacity;
+        char *new_data = new char[new_capacity];
+        memcpy(new_data, m_data, m_size);
+        delete [] m_data;
+        m_capacity = new_capacity;
+        m_data = new_data;
+    }
+};
+
+int string::copy_count = 0;
+
+void itoa_impl(int i, string& s) {
+    if (i != 0) {
+        itoa_impl(i / 10, s);
+        int digit = i % 10;
+        digit = digit > 0 ? digit : -digit;
+        s.push_back('0' + digit);
+    }
+}
+
+string itoa(int i) {
+    if (i == 0) return string("0");
+    string ret;
+    if (i < 0) {
+        ret.push_back('-');
+    }
+    itoa_impl(i, ret);
+    return ret;
+}
+
+int main() {
+    string str_vec[20];
+    for (int i = 90; i < 110; ++i) {
+        str_vec[i - 90].move(itoa(i));
+    }
+    for (int i = 110; i > 90; --i) {
+        printf("%s\n", str_vec[i - 91].c_str());
+    }
+}
