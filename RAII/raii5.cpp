@@ -4,6 +4,7 @@
 
 class string {
 public:
+    string(): m_size(0), m_data(nullptr) {}
     string(const char* str): m_size(strlen(str)), m_data(new char[m_size]) {
         memcpy(m_data, str, m_size);
     }

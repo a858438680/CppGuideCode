@@ -4,6 +4,7 @@
 
 class string {
 public:
+    string(): m_data(nullptr), m_size(0) {}
     explicit string(const char* str): m_data(str), m_size(strlen(str)) {}
     string(const char* data, size_t size): m_data(data), m_size(size) {}
     const char* begin() const { return m_data; }
