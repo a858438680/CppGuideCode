@@ -1,9 +1,6 @@
-#include <iostream>
 #include <atomic>
 #include <thread>
 #include <cassert>
-
-using namespace std::chrono_literals;
 
 std::atomic<int> a{0};
 int b = 0;
