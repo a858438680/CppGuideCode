@@ -16,4 +16,6 @@ add_subdirectory(${CMAKE_SOURCE_DIR}/Atomic)
 
 add_subdirectory(${CMAKE_SOURCE_DIR}/SmartPointer)
 
+add_subdirectory(${CMAKE_SOURCE_DIR}/Patterns)
+
 add_subdirectory(${CMAKE_SOURCE_DIR}/Execution)
