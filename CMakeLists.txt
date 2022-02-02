@@ -1,0 +1,13 @@
+cmake_minimum_required(VERSION 3.14)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
+set(CMAKE_CXX_EXTENSIONS FALSE)
+
+project(CppGuide)
+
+add_subdirectory(${CMAKE_SOURCE_DIR}/String)
+
+add_subdirectory(${CMAKE_SOURCE_DIR}/Atomic)
+
+add_subdirectory(${CMAKE_SOURCE_DIR}/Execution)
