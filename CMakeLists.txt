@@ -6,8 +6,14 @@ set(CMAKE_CXX_EXTENSIONS FALSE)
 
 project(CppGuide)
 
+add_subdirectory(${CMAKE_SOURCE_DIR}/RAII)
+
 add_subdirectory(${CMAKE_SOURCE_DIR}/String)
 
+add_subdirectory(${CMAKE_SOURCE_DIR}/Rvalue)
+
 add_subdirectory(${CMAKE_SOURCE_DIR}/Atomic)
+
+add_subdirectory(${CMAKE_SOURCE_DIR}/SmartPointer)
 
 add_subdirectory(${CMAKE_SOURCE_DIR}/Execution)
