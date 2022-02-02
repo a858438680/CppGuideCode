@@ -1,0 +1,5 @@
+add_executable(raii1 ${CMAKE_CURRENT_SOURCE_DIR}/raii1.cpp)
+add_executable(raii2 ${CMAKE_CURRENT_SOURCE_DIR}/raii2.cpp)
+add_executable(raii3 ${CMAKE_CURRENT_SOURCE_DIR}/raii3.cpp)
+add_executable(raii4 ${CMAKE_CURRENT_SOURCE_DIR}/raii4.cpp)
+add_executable(raii5 ${CMAKE_CURRENT_SOURCE_DIR}/raii5.cpp)
