@@ -12,7 +12,7 @@ add_subdirectory(${CMAKE_SOURCE_DIR}/String)
 
 add_subdirectory(${CMAKE_SOURCE_DIR}/Rvalue)
 
-add_subdirectory(${CMAKE_SOURCE_DIR}/Invokable)
+add_subdirectory(${CMAKE_SOURCE_DIR}/Callable)
 
 add_subdirectory(${CMAKE_SOURCE_DIR}/Atomic)
 
