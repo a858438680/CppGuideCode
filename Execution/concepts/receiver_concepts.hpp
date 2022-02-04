@@ -1,7 +1,12 @@
+#ifndef EXECUTION_CONCEPTS_RECEIVER_CONCEPTS_HPP_
+#define EXECUTION_CONCEPTS_RECEIVER_CONCEPTS_HPP_
+
 #include <concepts>
 #include <exception>
 #include <type_traits>
 #include <utility>
+
+namespace standard {
 
 namespace execution {
 
@@ -21,4 +26,8 @@ concept receiver_of =
         set_value(std::move(r), static_cast<Args&&>(args)...);
     };
 
-}
+} // namespace execution
+
+} // namespace standard
+
+#endif // EXECUTION_CONCEPTS_RECEIVER_CONCEPTS_HPP_
